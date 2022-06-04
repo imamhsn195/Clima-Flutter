@@ -14,7 +14,7 @@ class _CityScreenState extends State<CityScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/city_background.jpg'),
+            image: AssetImage('images/city_screen_bg.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -25,7 +25,9 @@ class _CityScreenState extends State<CityScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
@@ -34,19 +36,21 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: TextFormField(
-                  onChanged: (value){
-                    cityName = value;
+                child: TextField(
+                  onChanged: (typedName){
+                    cityName = typedName;
                   },
                   decoration: InputDecoration(
-                    border: null,
+                    border: OutlineInputBorder(),
                     hintText: "Enter City Name",
                   ),
                 ),
               ),
               FlatButton(
                 onPressed: () {
-                  Navigator.pop(context, cityName);
+                  if(cityName != null) {
+                    Navigator.pop(context, cityName);
+                  }
                 },
                 child: Text(
                   'Get Weather',
